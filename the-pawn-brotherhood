@@ -30,19 +30,15 @@ def board():
                             for col in file]
 ​
 def safe_pawns(pawns):
-    ''' Main Function '''
     safe = 0
     brd = board()
-    pawn_locations = []
-    # Two for loops, to identify and append pawn locations.
-    for pawn in pawns:
-        for file, rank in enumerate(brd):
-            if pawn in rank:            
-                pawn_locations.append((rank.index(pawn), file))
-    # Determines whether or not potential defenses exist within
-    # list of locations.
+    #Two for loops, to identify and append pawn locations.
+    pawn_locations = [(rank.index(pawn), file) for pawn in pawns 
+                    for file, rank in enumerate(brd) if pawn in rank]
+    #Determines whether or not potential defenses exist within list of locations.
     for pawn in pawn_locations:
         if (pawn[0]-1, pawn[1]+1) in pawn_locations or \
         (pawn[0]-1, pawn[1]-1) in pawn_locations:
             safe += 1
     return safe
+
