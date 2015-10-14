@@ -27,7 +27,7 @@ def startandgraph(string):
         yield start, connections
 ​
 def checkio(string):
-    ''' an implementation of Breadth First Search, 
+    ''' an implementation of solution using Breadth First Search, 
     based on some helpful info from the forums'''
     sg = startandgraph(string)
     visited_all = set('12345678')
@@ -47,7 +47,7 @@ def checkio(string):
 ​
             active_route, current_node = queue[0]
             queue.remove(queue[0])
-            forker = active_route # makes movement to other branches possible when there's > 1 neighbor
+            forker = active_route # allows movement to branches possible when >1 neighbor
             used_nodes = [active_route[node_idx:node_idx + 2] 
                     for node_idx in range(0, len(active_route), 2)]
             used_nodes_inverse = [active_route[node_idx:node_idx + 2][::-1] 
