@@ -1,4 +1,15 @@
-''' Info on this particular solution can be found here https://www.checkio.org/mission/disposable-teleports/.'''
+''' 
+From checkio task page:
+"This task is another example of the graph-search problem. 
+It’s like trying to find a route where you can not to step on the same spot twice."
+
+Solution implemented as a BFS graph search algorithm.
+
+Input: A teleport map as a string.
+Output: The sequence of station numbers as a string.
+
+More info can be found here https://www.checkio.org/mission/disposable-teleports/.
+'''
 
 
 def find_neighbors(node, graph):
