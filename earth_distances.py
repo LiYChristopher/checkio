@@ -1,5 +1,6 @@
 '''
-IN - Two pairs of Lat./Long. coordinates (First --> Second)
+IN - Two pairs of Lat./Long. coordinates (First --> Second); 
+each in format d°m′s″X (degree, minutes, seconds, direction)
 OUT- distance between the two points in kilometers
 
 "The concepts presented in this mission are the exact sorts of concepts used in navigational software, 
@@ -17,7 +18,7 @@ R = 6371
 ​
 def clean_input(input_string):
     ''' Takes pairs of coordinates (first or second),
-    and returns a namedtuple-object to be used in the
+    and returns a list of clean coordinates to be used in the
     main function. '''
 ​
     format = re.sub(r'(,\s)|\,', " ",input_string, re.I)
@@ -28,7 +29,7 @@ def clean_input(input_string):
     return result
 ​
 def convert_to_radians(deg, min, sec, dir):
-    ''' Calculates total degrees of a coordinate (Lat or Long),
+    ''' Calculates total degrees of a coordinate (Lat./Long.),
     then converts it into radians.'''
     
     total_degrees = float(deg) + (float(min)/60) + (float(sec)/60**2)
