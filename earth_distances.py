@@ -11,7 +11,7 @@ def clean_input(input_string):
 ​
     format = re.sub(r'(,\s)|\,', " ",input_string, re.I)
     pair_points = format.encode('utf-8').split(' ')
-    clean = lambda point: (re.search(r'([0-9]*)..([0-9]*)...([0-9]*)...([A-Z]*)',
+    clean = lambda point: (re.search(r'([0-9]*)°([0-9]*)′([0-9]*)\″([A-Z]*)',
                                     point, re.I)).groups()
     result = [clean(point) for point in pair_points]
     return result
