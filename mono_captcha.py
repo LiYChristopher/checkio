@@ -1,3 +1,16 @@
+'''
+From checkio task page:
+
+"This task will show you how optical character recognition works and will
+familiarize you with low-resolution fonts requiring noise-immunity.
+This can be useful for the systems that required the reliability."
+
+Input: An image as a list of lists with 1 or 0
+Output: The number as type(int).
+
+More info can be found here https://www.checkio.org/mission/mono-captcha/.
+'''
+
 from collections import Counter
 
 FONT = ("--X--XXX-XXX-X-X-XXX--XX-XXX-XXX--XX-XX--"
@@ -8,8 +21,7 @@ FONT = ("--X--XXX-XXX-X-X-XXX--XX-XXX-XXX--XX-XX--"
 
 
 def convert_to_str(image):
-    ''' Takes a list of lists, representing an
-    image of numbers, and converts each pixel (int) into strings.'''
+    ''' Converts each pixel in image into strings.'''
 
     str_image = []
     for layer in image:
@@ -74,7 +86,7 @@ def num_digits(image):
 
 
 def checkio(image):
-    ''' Monocaptcha - for each digit in a given 'image':
+    ''' Monocaptcha - for each digit in a given image:
 
     1) 'Extract' next digit from the image.
 
@@ -83,16 +95,16 @@ def checkio(image):
     3) 'Check for a match' - iterate through potential matches
         (in global var 'FONT'), and unroll the digit.
 
-        Then count pixels and positional alignment, and compare
-        with those of the potential matching digit. Using
-        thresholds to process noise, add the digit
-        to the resultant string.
+        Count pixels and positional alignment;
+        compare with those of the potential matching digit.
+        If passes noise thresholds, add digit to result string.
     '''
 
     conversion_print = ''
     # convert array 'image' to string
     str_image = convert_to_str(image)
     ndigits = num_digits(str_image[0])
+
     #split str image to digits
     for i in range(ndigits):
         current_digit = []
@@ -107,10 +119,11 @@ def checkio(image):
         # scan for match
         for check in xrange(1, 11):
             match_digit = convert_font(FONT, check)
-            img_pixels = Counter(current_digit)['1']
-            md_pixels = Counter(match_digit)['1']
+            img_pixels, md_pixels = map(lambda x: Counter(x)['1'],
+                                        [current_digit, match_digit])
             matchlayers = digit_to_layers(match_digit)
             posmatch = positional_match(digilayers, matchlayers)
+
             # push digit along to final result, if it passes our thresholds
             if 14 <= posmatch <= 15 and (md_pixels <= img_pixels + 1):
                 if check == 10:
