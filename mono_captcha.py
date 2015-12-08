@@ -119,8 +119,8 @@ def checkio(image):
         # scan for match
         for check in xrange(1, 11):
             match_digit = convert_font(FONT, check)
-            img_pixels, md_pixels = map(lambda x: Counter(x)['1'],
-                                        [current_digit, match_digit])
+            img_pixels, md_pixels = [Counter(d)['1'] for d in
+                                    [current_digit, match_digit]]
             matchlayers = digit_to_layers(match_digit)
             posmatch = positional_match(digilayers, matchlayers)
 
